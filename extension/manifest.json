@@ -1,12 +1,20 @@
 {
   "name": "Sample",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "manifest_version": 2,
   "description": "Sample Chrome Extension",
   "content_scripts": [{
-    "matches": ["https://mobile.twitter.com/home?lang=ja"],
+    "matches": ["https://*.twitter.com/*"],
     "js": [
-      "try.js"
+      "jquery-3.4.1.min.js",
+      "jquery.easing.js",
+      "script.js"
+    ],
+    "html": [
+      "index.html"
+    ],
+    "css": [
+      "try.css"
     ]
   }]
 }
