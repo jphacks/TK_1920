@@ -4,6 +4,7 @@ import http.server
 from gensim.models.word2vec import Word2Vec
 import json
 import urllib.request
+import urllib.parse
 import requests
 
 # word2vecの読み込み
@@ -15,7 +16,8 @@ with open('./learning/tweet_data/typical_words.json', 'r') as f:
 class EmojiHandler(http.server.BaseHTTPRequestHandler):
   def do_POST(self):
     content_len = int(self.headers.get('content-length'))
-    requestBody = json.load(self.rfile.read(content_len).decode('utf-8'))
+    # requestBody = json.loads(self.rfile.read(content_len).decode('utf-8'))
+    sentence = urllib.parse.unquote(self.rfile.read(content_len).decode('utf-8')).split("=")[1]
 
     self.send_response(200)
     self.send_header('Content-type', 'aplication/json')
@@ -26,7 +28,8 @@ class EmojiHandler(http.server.BaseHTTPRequestHandler):
     url = 'https://labs.goo.ne.jp/api/morph'
     data = {
       'app_id': '58e6499c26849459065defb21ba415df2958862d0e2fbbc5fc7bc69f32a09ca5',
-      'sentence': requestBody['sentence'],
+      # 'sentence': requestBody['sentence'],
+      'sentence': sentence,
       'pos_filter': '名詞|形容詞語幹|連用詞|連体詞|独立詞'
     }
     headers = {
@@ -54,7 +57,7 @@ class EmojiHandler(http.server.BaseHTTPRequestHandler):
     rank_list.sort(key=lambda x: x[1], reverse=True)
     # ここまで評価
 
-    self.wfile.write(json.dumps([x[1] for x in rank_list]).encode('utf-8'))
+    self.wfile.write(json.dumps([x[0] for x in rank_list]).encode('utf-8'))
 
 with http.server.HTTPServer(('', 8000), EmojiHandler) as server:
   print('server runing...')
