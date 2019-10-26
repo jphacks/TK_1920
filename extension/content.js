@@ -42,7 +42,7 @@ function reqListener () {
 }
   
 document.onkeydown = function(event){    
-    if (event.key === "Process" && event.code === "Enter"){
+    if (event.code === "Enter"){
         var oReq = new XMLHttpRequest();
         oReq.addEventListener("load", reqListener);
         oReq.open("GET", "http://localhost:8000");
@@ -50,7 +50,3 @@ document.onkeydown = function(event){
         oReq.send();
     }
 }
-
-
-
-
