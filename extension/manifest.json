@@ -1,6 +1,6 @@
 {
   "name": "Sample",
-  "version": "1.2.1",
+  "version": "1.4.1",
   "manifest_version": 2,
   "description": "Sample Chrome Extension",
   "content_scripts": [{
