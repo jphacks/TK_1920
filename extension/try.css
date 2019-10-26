@@ -1,8 +1,8 @@
 .balloon1 {
-    position: fix;
+    position: absolute;
     display: inline-block;
-    margin: 1.5em 0;
-    padding: 7px 10px;
+    text-align: center;
+    padding: 20px 26px;
     min-width: 120px;
     max-width: 100%;
     color: #555;
