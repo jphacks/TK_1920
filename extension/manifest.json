@@ -1,13 +1,11 @@
 {
-  "name": "Sample",
-  "version": "1.6.0",
+  "name": "Emojestion",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Sample Chrome Extension",
+  "description": "AI suggests emoji.",
   "content_scripts": [{
-    "matches": ["https://*.twitter.com/*"],
+    "matches": ["https://tweetdeck.twitter.com/*"],
     "js": [
-      "jquery-3.4.1.min.js",
-      "jquery.easing.js",
       "content.js"
     ]
   }]
