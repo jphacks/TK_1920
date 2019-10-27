@@ -15,12 +15,12 @@ div.style.position = "absolute";
 div.style.display = "flex";
 div.style.alignItems = "center";
 div.style.justifyContent = "center";
-div.style.fontSize = "30px";
-div.style.top = "0";
-div.style.left = "31%";
-div.style.width = "300px";
-div.style.height = "54px";
-div.style.backgroundColor = "rgba(29,161,242,0.5)";
+div.style.fontSize = "23px";
+div.style.top = "152px";
+div.style.left = "4.8%";
+div.style.width = "250px";
+div.style.height = "50px";
+div.style.backgroundColor = "rgba(255,255,255,0.5)";
 div.style.borderRadius = "2.5em";
 document.body.appendChild(div);
 
@@ -42,7 +42,7 @@ function reqListener () {
 }
   
 document.onkeydown = function(event){    
-    if (event.key === "Process" && event.code === "Enter"){
+    if (event.code === "Enter"){
         var oReq = new XMLHttpRequest();
         oReq.addEventListener("load", reqListener);
         oReq.open("GET", "http://localhost:8000");
@@ -50,7 +50,3 @@ document.onkeydown = function(event){
         oReq.send();
     }
 }
-
-
-
-
