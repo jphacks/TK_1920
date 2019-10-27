@@ -28,7 +28,6 @@ function reqListener () {
     console.log(this.responseText);
     const number = JSON.parse(this.responseText);
     const words = number.map(i => array[i]);
-    console.log(words);
     div.innerHTML = "";
     words.forEach(word => {
         const span = document.createElement("span");
@@ -42,11 +41,26 @@ function reqListener () {
 }
   
 document.onkeydown = function(event){    
+    function EncodeHTMLForm(data) {
+        var params = [];
+
+        for(var name in data) {
+            var value = data[name];
+            var param = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+
+            params.push(param);
+        }
+
+        return params.join('&').replace(/%20/g, '+');
+    }
+
     if (event.code === "Enter"){
         var oReq = new XMLHttpRequest();
         oReq.addEventListener("load", reqListener);
-        oReq.open("GET", "http://localhost:8000");
-        //oReq.open("GET", "http://192.168.33.10:8000");
-        oReq.send();
+        //oReq.open("POST", "http://localhost:8000");
+        oReq.open("POST", "http://192.168.33.10:8000");
+        oReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        const text = document.querySelector(".js-compose-text").value;
+        oReq.send(EncodeHTMLForm({sentence: text.split("\n").slice(-1)[0]}));
     }
 }
