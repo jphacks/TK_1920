@@ -8,12 +8,12 @@ with open('./learning/tweet_data/ranking.json', 'r') as f:
 
 data_list = []
 for row in ranking_list:
-  if row[0] <= 0.5:
+  if row[0] < 1/3:
     break
   try:
     model.similarity(row[1], 'こんにちは')
-    if max(row[2]) >= 4:
-      data_list.append([row[1], row[2].index(max(row[2]))]);
+    if sum(row[2]) >= 16:
+      data_list.append([row[1], row[2].index(max(row[2])), row[0]]);
   except KeyError as error:
     pass
 

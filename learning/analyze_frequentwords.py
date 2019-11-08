@@ -2,7 +2,7 @@ from janome.tokenizer import Tokenizer
 import json
 
 def learning():
-  emoji_num = 8
+  emoji_num = 12
   counter_map = {}
   tokenizer = Tokenizer()
 
@@ -25,7 +25,8 @@ def learning():
           part.find('形容詞') >= 0 or
           part.find('副詞') >= 0 or
           part.find('連体詞') >= 0 or
-          part.find('感動詞') >= 0
+          part.find('感動詞') >= 0 or
+          part.find('動詞') >= 0
         ):
           word = token.base_form
           if word not in counter_map:
