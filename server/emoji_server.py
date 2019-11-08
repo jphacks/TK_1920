@@ -62,7 +62,7 @@ class EmojiHandler(http.server.BaseHTTPRequestHandler):
     for input_word in word_list:
       for data_word in data_list:
         try:
-          sim = model.similarity(input_word[0], data_word[0]) * data_word[2]
+          sim = model.similarity(input_word[0], data_word[0])
           if sim > rank_list[data_word[1]][1]:
             rank_list[data_word[1]][1] = sim
         except KeyError as error:
