@@ -1,4 +1,4 @@
-const array = [
+﻿const array = [
     "🤔",
     "✋",
     "💪",
@@ -6,7 +6,11 @@ const array = [
     "⚡️",
     "💧",
     "🚨",
-    "❤️"
+    "❤️",
+    "☔️",
+    "📺",
+    "💤",
+    "🙏",
 ]
 
 const div = document.createElement("div");
@@ -35,7 +39,7 @@ window.setInterval(f,1000);
 function reqListener () {
     console.log(this.responseText);
     const number = JSON.parse(this.responseText);
-    const words = number.map(i => array[i]);
+    const words = number.map(i => array[i]).slice(0, 6);
     div.innerHTML = "";
     words.forEach(word => {
         const span = document.createElement("span");
