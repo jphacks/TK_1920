@@ -30,7 +30,7 @@ class EmojiHandler(http.server.BaseHTTPRequestHandler):
       'app_id': '58e6499c26849459065defb21ba415df2958862d0e2fbbc5fc7bc69f32a09ca5',
       # 'sentence': requestBody['sentence'],
       'sentence': sentence,
-      'pos_filter': '名詞|形容詞語幹|連用詞|連体詞|独立詞'
+      'pos_filter': '名詞|形容詞語幹|形容詞接尾辞|連用詞|連体詞|独立詞|動詞語幹|動詞活用語尾'
     }
     headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -43,12 +43,26 @@ class EmojiHandler(http.server.BaseHTTPRequestHandler):
     )
     word_list = json.loads(r.text)['word_list'][0]
 
-    emoji_num = 8
+    # gooラボでは形容詞と動詞は語幹と語尾に分割されるが
+    # word2vecでは分けられないので連結
+    for i in range(len(word_list) - 1):
+      if (
+        word_list[i][1] == '形容詞語幹' and
+          word_list[i + 1][1] == '形容詞接尾辞'
+      ):
+        word_list[i][0] += word_list[i + 1][0]
+      if (
+        word_list[i][1] == '動詞語幹' and
+          word_list[i + 1][1] == '動詞活用語尾'
+      ):
+        word_list[i][0] += word_list[i + 1][0]
+
+    emoji_num = 12
     rank_list = [[i, 0] for i in range(emoji_num)]
     for input_word in word_list:
       for data_word in data_list:
         try:
-          sim = model.similarity(input_word[0], data_word[0])
+          sim = model.similarity(input_word[0], data_word[0]) * data_word[2]
           if sim > rank_list[data_word[1]][1]:
             rank_list[data_word[1]][1] = sim
         except KeyError as error:
