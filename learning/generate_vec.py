@@ -12,7 +12,7 @@ for row in ranking_list:
     break
   try:
     model.similarity(row[1], 'こんにちは')
-    if sum(row[2]) >= 16:
+    if sum(row[2]) >= 16 or max(row[2]) >= 4:
       data_list.append([row[1], row[2].index(max(row[2])), row[0]]);
   except KeyError as error:
     pass
