@@ -32,7 +32,7 @@
 
 ### 活用した技術
 #### API・データ
-* 形態素解析API
+* gooラボ 形態素解析API
 * 日本語word2vecモデル(http://aial.shiroyagi.co.jp/2017/02/japanese-word2vec-model-builder/)
 
 #### フレームワーク・ライブラリ・モジュール
