@@ -4,7 +4,10 @@
   "manifest_version": 2,
   "description": "AI suggests emoji.",
   "content_scripts": [{
-    "matches": ["https://tweetdeck.twitter.com/*"],
+    "matches": [
+      "https://tweetdeck.twitter.com/*",
+      "https://app.slack.com/client/*"
+    ],
     "js": [
       "content.js"
     ]
